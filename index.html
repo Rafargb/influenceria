@@ -1308,6 +1308,328 @@
         animation-duration: 1ms !important;
         transition-duration: 1ms !important;
       }
+    /* Roleta de Desconto & Modal */
+    .roulette-trigger-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 18px 0 22px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 45, 137, 0.45);
+      border-radius: 16px;
+      background: radial-gradient(circle at 10% 50%, rgba(255, 45, 137, 0.2), transparent 60%), #140d18;
+      box-shadow: 0 0 24px rgba(255, 45, 137, 0.22);
+      cursor: pointer;
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 45, 137, 0.2); }
+      50% { box-shadow: 0 0 32px rgba(255, 45, 137, 0.45), 0 0 60px rgba(123, 46, 255, 0.25); }
+    }
+
+    .roulette-trigger-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .roulette-trigger-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .roulette-trigger-text strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .roulette-trigger-text span {
+      color: #e5b6d5;
+      font-size: 12px;
+    }
+
+    .roulette-trigger-btn {
+      padding: 8px 14px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(255, 45, 137, 0.5);
+    }
+
+    .coupon-alert {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 16px 0 20px;
+      padding: 12px 14px;
+      border: 1px solid rgba(44, 226, 138, 0.55);
+      border-radius: 12px;
+      background: rgba(44, 226, 138, 0.12);
+      color: #7affbf;
+      font-size: 13px;
+      font-weight: 700;
+      animation: enter 360ms ease both;
+    }
+
+    .coupon-alert button {
+      padding: 6px 12px;
+      border: 0;
+      border-radius: 8px;
+      background: #2ce28a;
+      color: #081a10;
+      font-weight: 800;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .roulette-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 5, 8, 0.88);
+      backdrop-filter: blur(12px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      animation: fadeIn 240ms ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .roulette-modal {
+      position: relative;
+      width: min(100%, 420px);
+      max-height: 94svh;
+      overflow-y: auto;
+      padding: 28px 20px;
+      border: 1px solid rgba(123, 46, 255, 0.45);
+      border-radius: 24px;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 45, 137, 0.16), transparent 70%), linear-gradient(180deg, #17151e, #0e0d13);
+      box-shadow: 0 0 45px rgba(123, 46, 255, 0.45), 0 0 90px rgba(255, 45, 137, 0.2);
+      text-align: center;
+      animation: enter 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .roulette-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
+      color: #aaa;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .roulette-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .roulette-badge {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 45, 137, 0.15);
+      border: 1px solid rgba(255, 45, 137, 0.4);
+      color: var(--pink);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .roulette-badge.win-badge {
+      background: rgba(44, 226, 138, 0.16);
+      border-color: rgba(44, 226, 138, 0.5);
+      color: #2ce28a;
+    }
+
+    .roulette-title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .roulette-subtitle {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .roulette-wheel-container {
+      position: relative;
+      width: 270px;
+      height: 270px;
+      margin: 0 auto 20px;
+    }
+
+    #rouletteCanvas {
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      box-shadow: 0 0 35px rgba(123, 46, 255, 0.5), inset 0 0 15px rgba(0,0,0,0.8);
+      display: block;
+    }
+
+    .roulette-pointer {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 26px solid #ff2d89;
+      filter: drop-shadow(0 2px 8px rgba(255, 45, 137, 0.8));
+    }
+
+    .roulette-center-pin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2b123d, #140d1c);
+      border: 3px solid #ff2d89;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      box-shadow: 0 0 16px rgba(255, 45, 137, 0.6);
+    }
+
+    .roulette-spin-btn {
+      min-height: 56px;
+      font-size: 15px;
+    }
+
+    .roulette-footnote {
+      margin-top: 10px;
+      color: #7a7282;
+      font-size: 11px;
+    }
+
+    /* Win State */
+    .coupon-box {
+      margin: 18px 0;
+      padding: 16px;
+      border-radius: 16px;
+      border: 2px dashed rgba(255, 45, 137, 0.7);
+      background: rgba(255, 45, 137, 0.08);
+      text-align: center;
+    }
+
+    .coupon-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #caa8c3;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .coupon-code-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .coupon-code {
+      padding: 8px 18px;
+      border-radius: 10px;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffde59;
+      font-family: monospace;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .copy-btn {
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(255, 45, 137, 0.4);
+      transition: transform 0.15s;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .win-price-preview {
+      margin: 14px 0 18px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .win-price-preview strong {
+      display: block;
+      margin-top: 4px;
+      color: #2ce28a;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .roulette-checkout-cta {
+      min-height: 58px;
+      font-size: 14px;
+    }
+
+    .copy-toast {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(44, 226, 138, 0.18);
+      border: 1px solid rgba(44, 226, 138, 0.5);
+      color: #7affbf;
+      font-size: 12px;
+      font-weight: 700;
+      animation: enter 240ms ease both;
+    }
+
+    .confetti-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
     }
   </style>
 </head>
@@ -1599,6 +1921,16 @@
     <section class="screen offer-screen" data-step="9">
       <div class="offer-badge">🔥 Oferta exclusiva — apenas hoje</div>
       <p class="offer-proof">👥 +1.200 criadores já usando o método</p>
+
+      <div class="roulette-trigger-banner" id="rouletteBanner" onclick="openRouletteModal()">
+        <div class="roulette-trigger-icon">🎰</div>
+        <div class="roulette-trigger-text">
+          <strong>Roleta da Sorte Disponível!</strong>
+          <span>Gire agora e tente ganhar até 65% de desconto extra</span>
+        </div>
+        <button type="button" class="roulette-trigger-btn">GIRAR ⚡</button>
+      </div>
+
       <h2>Você acabou de ver o que é possível. <span class="accent">Agora você vai criar a sua.</span></h2>
       <p class="subtext">A lista com mais de <strong style="color:#fff;">+20.000 prompts poderosos</strong> para criar sua influencer de IA do zero, sem saber nada, hoje mesmo.</p>
       <div class="results-grid" aria-label="Resultados gerados com IA">
@@ -1655,6 +1987,11 @@
 
       </div>
 
+      <div class="coupon-alert" id="couponAlert" style="display: none;">
+        <span>🎉 Cupom de 65% OFF ativo: <strong id="appliedCouponCode">DESC65</strong> (R$ 7,80 no checkout)</span>
+        <button type="button" onclick="copyCoupon()">Copiar</button>
+      </div>
+
       <div class="price-block">
         <p class="price-note">De R$ 302 por apenas...</p>
         <div class="old-price">R$ 47,00</div>
@@ -1704,6 +2041,57 @@
       <p class="footer-note">Tecnologia Influencer IA</p>
     </section>
   </main>
+
+  <!-- Modal da Roleta de Desconto -->
+  <div class="roulette-overlay" id="rouletteOverlay" style="display: none;" aria-hidden="true">
+    <div class="roulette-modal" role="dialog" aria-modal="true">
+      <button class="roulette-close" type="button" onclick="closeRouletteModal()" aria-label="Fechar">✕</button>
+      
+      <div id="rouletteInitialState">
+        <div class="roulette-badge">🎰 ROLETA DA SORTE</div>
+        <h3 class="roulette-title">Gire e ganhe até <br><span class="accent">65% de Desconto</span></h3>
+        <p class="roulette-subtitle">Você liberou 1 tentativa gratuita para tentar desbloquear até 65% de desconto extra no seu acesso!</p>
+        
+        <div class="roulette-wheel-container">
+          <div class="roulette-pointer"></div>
+          <canvas id="rouletteCanvas" width="300" height="300"></canvas>
+          <div class="roulette-center-pin">🎁</div>
+        </div>
+        
+        <button class="cta roulette-spin-btn" id="spinWheelBtn" type="button" onclick="spinRoulette()">GIRAR ROLETA AGORA ⚡</button>
+        <p class="roulette-footnote">Válido apenas hoje para sua primeira tentativa.</p>
+      </div>
+
+      <div id="rouletteWinState" style="display: none;">
+        <div class="roulette-badge win-badge">🎉 PARABÉNS! VOCÊ GANHOU!</div>
+        <h3 class="roulette-title">O maior prêmio da roleta: <br><span class="accent">65% DE DESCONTO EXTRA!</span></h3>
+        <p class="roulette-subtitle">Copie seu cupom abaixo e aplique no campo de cupom no checkout da Greenn:</p>
+        
+        <div class="coupon-box">
+          <span class="coupon-label">SEU CUPOM EXCLUSIVO:</span>
+          <div class="coupon-code-row">
+            <span class="coupon-code" id="couponCodeDisplay">DESC65</span>
+            <button class="copy-btn" id="copyCouponBtn" type="button" onclick="copyCouponAndGo()">
+              <span id="copyBtnText">COPIAR</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="win-price-preview">
+          <span>De <strike>R$ 22,30</strike> por apenas:</span>
+          <strong>R$ 7,80</strong>
+        </div>
+
+        <a class="cta roulette-checkout-cta" id="rouletteCheckoutLink" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197" onclick="copyCouponAndGo(event)">
+          ⚡ COPIAR CUPOM E IR PRO CHECKOUT
+        </a>
+        
+        <div id="copyToast" class="copy-toast" style="display: none;">✓ Cupom copiado! Cole no checkout para garantir R$ 7,80.</div>
+      </div>
+      
+      <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+    </div>
+  </div>
 
   <script>
     // Controle simples do funil: alterna telas, atualiza progresso e preserva as respostas do quiz.
@@ -1899,6 +2287,12 @@
       autoGenerate(screens[currentStep]);
       playVideosForScreen(screens[currentStep]);
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      if (screens[currentStep].classList.contains("offer-screen") && !hasSeenRoulette) {
+        setTimeout(() => {
+          openRouletteModal();
+        }, 1200);
+      }
     }
 
     const portrait = document.querySelector(".portrait");
@@ -1991,6 +2385,302 @@
         urgencyEl.textContent = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
       }
     }, 1000);
+
+    // ==========================================
+    // ROLETA DE DESCONTO INTERATIVA (65% OFF)
+    // ==========================================
+    const ROULETTE_COUPON_CODE = "DESC65";
+    const ROULETTE_CHECKOUT_URL = "https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197";
+    
+    let hasSeenRoulette = false;
+    let isSpinning = false;
+    let rouletteHasWon = false;
+    let currentWheelAngle = 0;
+    
+    const wheelCanvas = document.getElementById("rouletteCanvas");
+    const wheelCtx = wheelCanvas ? wheelCanvas.getContext("2d") : null;
+    const confettiCanvas = document.getElementById("confettiCanvas");
+    const confettiCtx = confettiCanvas ? confettiCanvas.getContext("2d") : null;
+
+    const rouletteSlices = [
+      { text: "65% OFF", color: "#ff2d89", textColor: "#ffffff", isWinner: true },
+      { text: "10% OFF", color: "#2d1645", textColor: "#e3d4f5" },
+      { text: "Tente Mais", color: "#181024", textColor: "#9e91b5" },
+      { text: "20% OFF", color: "#6a25b8", textColor: "#ffffff" },
+      { text: "50% OFF", color: "#9c1b64", textColor: "#ffffff" },
+      { text: "5% OFF", color: "#231636", textColor: "#c8badb" },
+      { text: "30% OFF", color: "#7b2eff", textColor: "#ffffff" },
+      { text: "Quase!", color: "#1b1429", textColor: "#9e91b5" }
+    ];
+
+    function drawWheel(angle = 0) {
+      if (!wheelCtx) return;
+      const size = 300;
+      const center = size / 2;
+      const radius = 140;
+      const sliceCount = rouletteSlices.length;
+      const sliceAngle = (2 * Math.PI) / sliceCount;
+
+      wheelCtx.clearRect(0, 0, size, size);
+
+      wheelCtx.save();
+      wheelCtx.translate(center, center);
+      wheelCtx.rotate(angle);
+
+      for (let i = 0; i < sliceCount; i++) {
+        const slice = rouletteSlices[i];
+        const start = -Math.PI / 2 - sliceAngle / 2 + i * sliceAngle;
+        const end = start + sliceAngle;
+
+        wheelCtx.beginPath();
+        wheelCtx.moveTo(0, 0);
+        wheelCtx.arc(0, 0, radius, start, end);
+        wheelCtx.closePath();
+
+        wheelCtx.fillStyle = slice.color;
+        wheelCtx.fill();
+
+        wheelCtx.lineWidth = 2;
+        wheelCtx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        wheelCtx.stroke();
+
+        if (slice.isWinner) {
+          wheelCtx.lineWidth = 4;
+          wheelCtx.strokeStyle = "#ffde59";
+          wheelCtx.stroke();
+        }
+
+        wheelCtx.save();
+        const midAngle = start + sliceAngle / 2;
+        wheelCtx.rotate(midAngle);
+        wheelCtx.textAlign = "right";
+        wheelCtx.fillStyle = slice.textColor;
+        wheelCtx.font = slice.isWinner ? "900 15px Poppins, Arial" : "700 13px Poppins, Arial";
+        wheelCtx.shadowColor = slice.isWinner ? "rgba(255, 222, 89, 0.8)" : "rgba(0,0,0,0.6)";
+        wheelCtx.shadowBlur = slice.isWinner ? 8 : 4;
+        wheelCtx.fillText(slice.text, radius - 18, 5);
+        wheelCtx.restore();
+      }
+
+      wheelCtx.beginPath();
+      wheelCtx.arc(0, 0, radius, 0, 2 * Math.PI);
+      wheelCtx.lineWidth = 6;
+      wheelCtx.strokeStyle = "rgba(123, 46, 255, 0.85)";
+      wheelCtx.stroke();
+
+      wheelCtx.restore();
+    }
+
+    if (wheelCanvas) {
+      drawWheel(0);
+    }
+
+    function playTickSound() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      audioContext = audioContext || new AudioCtx();
+      const now = audioContext.currentTime;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(800 + Math.random() * 200, now);
+      gain.gain.setValueAtTime(0.02, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start(now);
+      osc.stop(now + 0.04);
+    }
+
+    function playVictorySound() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      audioContext = audioContext || new AudioCtx();
+      const notes = [523.25, 659.25, 783.99, 1046.5];
+      notes.forEach((freq, i) => {
+        const now = audioContext.currentTime + i * 0.12;
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      });
+    }
+
+    function openRouletteModal() {
+      const overlay = document.getElementById("rouletteOverlay");
+      if (!overlay) return;
+      overlay.style.display = "grid";
+      overlay.setAttribute("aria-hidden", "false");
+      hasSeenRoulette = true;
+      if (!rouletteHasWon) {
+        drawWheel(currentWheelAngle);
+      }
+    }
+
+    function closeRouletteModal() {
+      const overlay = document.getElementById("rouletteOverlay");
+      if (!overlay || isSpinning) return;
+      overlay.style.display = "none";
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    function spinRoulette() {
+      if (isSpinning || rouletteHasWon) return;
+      isSpinning = true;
+
+      const spinBtn = document.getElementById("spinWheelBtn");
+      if (spinBtn) {
+        spinBtn.disabled = true;
+        spinBtn.textContent = "Girando a sorte... 🎰";
+      }
+
+      playInteractionSound("soft");
+
+      const startTime = performance.now();
+      const duration = 4200;
+      const fullRotations = 6 * (2 * Math.PI);
+      const sliceAngle = (2 * Math.PI) / rouletteSlices.length;
+      const targetOffset = (Math.random() - 0.5) * (sliceAngle * 0.4);
+      const totalAngle = fullRotations + targetOffset;
+      const startAngle = currentWheelAngle;
+
+      let lastTickSlice = -1;
+
+      function animateSpin(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        const ease = 1 - Math.pow(1 - progress, 4);
+
+        currentWheelAngle = startAngle + totalAngle * ease;
+        drawWheel(currentWheelAngle);
+
+        const currentSliceIndex = Math.floor((currentWheelAngle / sliceAngle)) % rouletteSlices.length;
+        if (currentSliceIndex !== lastTickSlice) {
+          playTickSound();
+          lastTickSlice = currentSliceIndex;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(animateSpin);
+        } else {
+          isSpinning = false;
+          rouletteHasWon = true;
+          handleRouletteWin();
+        }
+      }
+
+      requestAnimationFrame(animateSpin);
+    }
+
+    function handleRouletteWin() {
+      playVictorySound();
+      startConfetti();
+
+      document.getElementById("rouletteInitialState").style.display = "none";
+      document.getElementById("rouletteWinState").style.display = "block";
+
+      const couponAlert = document.getElementById("couponAlert");
+      if (couponAlert) {
+        couponAlert.style.display = "flex";
+      }
+
+      const bannerText = document.querySelector("#rouletteBanner .roulette-trigger-text span");
+      if (bannerText) {
+        bannerText.textContent = `🎉 Você ganhou 65% OFF! Cupom ativo: ${ROULETTE_COUPON_CODE}`;
+      }
+    }
+
+    function copyCoupon() {
+      navigator.clipboard.writeText(ROULETTE_COUPON_CODE).then(() => {
+        alert(`Cupom ${ROULETTE_COUPON_CODE} copiado! Cole no checkout para pagar apenas R$ 7,80.`);
+      }).catch(() => {
+        prompt("Copie seu cupom de 65% OFF:", ROULETTE_COUPON_CODE);
+      });
+    }
+
+    function copyCouponAndGo(e) {
+      if (e) e.preventDefault();
+      const toast = document.getElementById("copyToast");
+      const copyBtnText = document.getElementById("copyBtnText");
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(ROULETTE_COUPON_CODE);
+      }
+
+      if (copyBtnText) copyBtnText.textContent = "✓ COPIADO!";
+      if (toast) toast.style.display = "block";
+
+      playInteractionSound("success");
+
+      setTimeout(() => {
+        window.location.href = ROULETTE_CHECKOUT_URL;
+      }, 950);
+    }
+
+    function startConfetti() {
+      if (!confettiCanvas || !confettiCtx) return;
+      confettiCanvas.width = confettiCanvas.parentElement.clientWidth;
+      confettiCanvas.height = confettiCanvas.parentElement.clientHeight;
+
+      const particles = [];
+      const colors = ["#ff2d89", "#7b2eff", "#ffde59", "#2ce28a", "#00d2ff"];
+
+      for (let i = 0; i < 45; i++) {
+        particles.push({
+          x: confettiCanvas.width / 2,
+          y: confettiCanvas.height / 3,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.8) * 14,
+          size: Math.random() * 6 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 10,
+          opacity: 1
+        });
+      }
+
+      let frame = 0;
+      function renderConfetti() {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        let alive = false;
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35;
+          p.vx *= 0.98;
+          p.rotation += p.vRot;
+          p.opacity -= 0.009;
+
+          if (p.opacity > 0) {
+            alive = true;
+            confettiCtx.save();
+            confettiCtx.translate(p.x, p.y);
+            confettiCtx.rotate((p.rotation * Math.PI) / 180);
+            confettiCtx.fillStyle = p.color;
+            confettiCtx.globalAlpha = Math.max(0, p.opacity);
+            confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 1.4);
+            confettiCtx.restore();
+          }
+        });
+
+        frame++;
+        if (alive && frame < 180) {
+          requestAnimationFrame(renderConfetti);
+        } else {
+          confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        }
+      }
+
+      requestAnimationFrame(renderConfetti);
+    }
   </script>
 </body>
 </html>
