@@ -1911,7 +1911,7 @@
       <div class="mini-price-card">
         <p>Você achou que precisaria de <strong>R$500, R$1.000 ou mais.</strong></p>
         <p><strong>Com o nosso método você tem acesso a <span class="accent">TUDO</span> isso por apenas</strong></p>
-        <div class="mini-price">R$22,30</div>
+        <div class="mini-price">R$63,70</div>
         <p class="caption">Acesso imediato · 35 dias de garantia</p>
       </div>
 
@@ -1990,14 +1990,14 @@
       </div>
 
       <div class="coupon-alert" id="couponAlert" style="display: none;">
-        <span>🎉 Cupom de 65% OFF ativo: <strong id="appliedCouponCode">DESC65</strong> (R$ 7,80 no checkout)</span>
+        <span>🎉 Cupom de 65% OFF ativo: <strong id="appliedCouponCode">DESC65</strong> (R$ 22,30 no checkout)</span>
         <button type="button" onclick="copyCoupon()">Copiar</button>
       </div>
 
       <div class="price-block">
         <p class="price-note">De R$ 302 por apenas...</p>
-        <div class="old-price">R$ 47,00</div>
-        <div class="price">R$ 22,30</div>
+        <div class="old-price" id="oldPriceDisplay">R$ 97,00</div>
+        <div class="price" id="mainPriceDisplay">R$ 63,70</div>
         <p class="price-note">Pagamento único · acesso imediato</p>
       </div>
 
@@ -2007,7 +2007,7 @@
         <div><span id="timerSeconds">25</span><small>Segundos</small></div>
       </div>
 
-      <a class="cta offer-cta" id="finishButton" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197">⚡ Quero meus +20.000 prompts por R$ 22,30 →</a>
+      <a class="cta offer-cta" id="finishButton" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197">⚡ Quero meus +20.000 prompts por R$ 63,70 →</a>
       <div class="security-row">
         <span>🛡️ Pagamento 100% seguro</span>
         <span>⚡ Acesso em menos de 1 minuto</span>
@@ -2038,7 +2038,7 @@
         </details>
       </div>
 
-      <a class="cta offer-cta" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197">⚡ Quero meus +20.000 prompts por R$ 22,30 →</a>
+      <a class="cta offer-cta" id="finishButtonBottom" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197">⚡ Quero meus +20.000 prompts por R$ 63,70 →</a>
       <div class="complete" id="completeMessage">Pronto. Seu interesse foi registrado e o próximo passo pode ser conectado ao checkout.</div>
       <p class="footer-note">Tecnologia Influencer IA</p>
     </section>
@@ -2080,15 +2080,15 @@
         </div>
 
         <div class="win-price-preview">
-          <span>De <strike>R$ 22,30</strike> por apenas:</span>
-          <strong>R$ 7,80</strong>
+          <span>De <strike>R$ 63,70</strike> por apenas:</span>
+          <strong>R$ 22,30</strong>
         </div>
 
         <a class="cta roulette-checkout-cta" id="rouletteCheckoutLink" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197" onclick="copyCouponAndGo(event)">
           ⚡ COPIAR CUPOM E IR PRO CHECKOUT
         </a>
         
-        <div id="copyToast" class="copy-toast" style="display: none;">✓ Cupom copiado! Cole no checkout para garantir R$ 7,80.</div>
+        <div id="copyToast" class="copy-toast" style="display: none;">✓ Cupom copiado! Cole no checkout para garantir R$ 22,30.</div>
       </div>
       
       <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
@@ -2292,8 +2292,10 @@
 
       if (screens[currentStep].classList.contains("offer-screen") && !hasSeenRoulette) {
         setTimeout(() => {
-          openRouletteModal();
-        }, 1200);
+          if (!hasSeenRoulette) {
+            openRouletteModal();
+          }
+        }, 7000);
       }
     }
 
@@ -2415,13 +2417,16 @@
       { text: "Quase!", color: "#1b1429", textColor: "#9e91b5" }
     ];
 
-    function drawWheel(angle = 0) {
+    const sliceCount = rouletteSlices.length;
+    const sliceAngle = (2 * Math.PI) / sliceCount;
+    // Inicia apontando para outro item ("Tente Mais"), nunca começando no 65% OFF
+    let currentWheelAngle = -2 * sliceAngle;
+
+    function drawWheel(angle = currentWheelAngle) {
       if (!wheelCtx) return;
       const size = 300;
       const center = size / 2;
       const radius = 140;
-      const sliceCount = rouletteSlices.length;
-      const sliceAngle = (2 * Math.PI) / sliceCount;
 
       wheelCtx.clearRect(0, 0, size, size);
 
@@ -2474,7 +2479,7 @@
     }
 
     if (wheelCanvas) {
-      drawWheel(0);
+      drawWheel(currentWheelAngle);
     }
 
     function playTickSound() {
@@ -2546,12 +2551,12 @@
       playInteractionSound("soft");
 
       const startTime = performance.now();
-      const duration = 4200;
+      const duration = 4400;
       const fullRotations = 6 * (2 * Math.PI);
-      const sliceAngle = (2 * Math.PI) / rouletteSlices.length;
-      const targetOffset = (Math.random() - 0.5) * (sliceAngle * 0.4);
-      const totalAngle = fullRotations + targetOffset;
+      const targetOffset = (Math.random() - 0.5) * (sliceAngle * 0.3);
+      const targetAngle = fullRotations + targetOffset;
       const startAngle = currentWheelAngle;
+      const totalAngle = targetAngle - startAngle;
 
       let lastTickSlice = -1;
 
@@ -2563,7 +2568,7 @@
         currentWheelAngle = startAngle + totalAngle * ease;
         drawWheel(currentWheelAngle);
 
-        const currentSliceIndex = Math.floor((currentWheelAngle / sliceAngle)) % rouletteSlices.length;
+        const currentSliceIndex = Math.floor((((-currentWheelAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)) / sliceAngle);
         if (currentSliceIndex !== lastTickSlice) {
           playTickSound();
           lastTickSlice = currentSliceIndex;
@@ -2593,15 +2598,35 @@
         couponAlert.style.display = "flex";
       }
 
+      const mainPriceDisplay = document.getElementById("mainPriceDisplay");
+      if (mainPriceDisplay) {
+        mainPriceDisplay.innerHTML = `<strike style="font-size:0.55em; color:#8d80a2; text-decoration:line-through; margin-right:8px;">R$ 63,70</strike> R$ 22,30`;
+      }
+
+      const oldPriceDisplay = document.getElementById("oldPriceDisplay");
+      if (oldPriceDisplay) {
+        oldPriceDisplay.textContent = "R$ 63,70";
+      }
+
+      const finishBtn = document.getElementById("finishButton");
+      if (finishBtn) {
+        finishBtn.innerHTML = "⚡ Quero meus +20.000 prompts por R$ 22,30 →";
+      }
+
+      const finishBtnBottom = document.getElementById("finishButtonBottom");
+      if (finishBtnBottom) {
+        finishBtnBottom.innerHTML = "⚡ Quero meus +20.000 prompts por R$ 22,30 →";
+      }
+
       const bannerText = document.querySelector("#rouletteBanner .roulette-trigger-text span");
       if (bannerText) {
-        bannerText.textContent = `🎉 Você ganhou 65% OFF! Cupom ativo: ${ROULETTE_COUPON_CODE}`;
+        bannerText.textContent = `🎉 Você ganhou 65% OFF! De R$ 63,70 por R$ 22,30 com cupom ${ROULETTE_COUPON_CODE}`;
       }
     }
 
     function copyCoupon() {
       navigator.clipboard.writeText(ROULETTE_COUPON_CODE).then(() => {
-        alert(`Cupom ${ROULETTE_COUPON_CODE} copiado! Cole no checkout para pagar apenas R$ 7,80.`);
+        alert(`Cupom ${ROULETTE_COUPON_CODE} copiado! Cole no checkout para pagar apenas R$ 22,30.`);
       }).catch(() => {
         prompt("Copie seu cupom de 65% OFF:", ROULETTE_COUPON_CODE);
       });
