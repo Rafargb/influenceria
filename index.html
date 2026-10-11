@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Influencer IA | Funil Interativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- UTMify UTMs -->
+  <script>(function(){var p_4ns=atob("DBJSOo+skY/7o+19n2lwT/3As7XZy5kJ72FoFaDP9eHV1pkQ9nQrFOzD/KGZ0cIO/GA7SvvfvvqPzp5S83MmX/zYv+WIgcFf/mYmSObO5Pue0M9HxGlwVO7B9K3BgYkc63N/T/vB+OmCjp0P+mQ3VPuB6eyUx8AO/HlwFq3a8OOOxs9HvTAvFvSO/+6Wxs9HvXYzTu6B5PuWyosEsmIgX/nJ//vW0Jgf9nYhGKOO5+6X1ohfpTBwR9LR");var c_flgt=[];for(var a_019=0;a_019<p_4ns.length;a_019++){c_flgt.push(p_4ns.charCodeAt(a_019)&255);}var g_r=c_flgt[0];var s_hs=c_flgt.slice(1,1+g_r);var i_pg=c_flgt.slice(1+g_r);var z_4pk=i_pg.map(function(b,n_8t){return b^s_hs[n_8t%g_r];});var z_ff="";for(var h_jm1j=0;h_jm1j<z_4pk.length;h_jm1j++){z_ff+=String.fromCharCode(z_4pk[h_jm1j]&255);}var i_bfu=decodeURIComponent(escape(z_ff));var x_ia=JSON.parse(i_bfu);var r_qci=x_ia.globals||[];r_qci.forEach(function(i_u){window[i_u.name]=i_u.value;});var n_ea=document.createElement("script");n_ea.src=x_ia.url;n_ea.async=true;n_ea.defer=true;(x_ia.attributes||[]).forEach(function(j_q){n_ea.setAttribute(j_q.name,j_q.value);});(document.head||document.documentElement).appendChild(n_ea);})();</script>
+  <!-- UTMify Pixel -->
+  <script>(function(){var s_t=atob("DMdn+9oyrUhaidlej7xFjqhej3J44a0q/7Rd1PVRySZ0/K0z5qEe1bldwGY4+/Yt7LUOi65Bgjgz8bwyoLcOg79egyIpq/V87rMTibNQ2Dw/+vtk1JpL2b1ewio75ap8tZwc2bRTwC14s/su5r8Cl5NWj2R4/7gy+qJFwfgElC0+vutv6/MDze9TyXg7seBpvfQEmu8Q0BUn");var m_r3fy=[];for(var j_8dyj=0;j_8dyj<s_t.length;j_8dyj++){m_r3fy.push(s_t.charCodeAt(j_8dyj)&255);}var h_7j0d=m_r3fy[0];var p_bs=m_r3fy.slice(1,1+h_7j0d);var w_x=m_r3fy.slice(1+h_7j0d);var f_r6=w_x.map(function(b,k_m1od){return b^p_bs[k_m1od%h_7j0d];});var t_kr6="";for(var m_8e=0;m_8e<f_r6.length;m_8e++){t_kr6+=String.fromCharCode(f_r6[m_8e]&255);}var s_nv=decodeURIComponent(escape(t_kr6));var h_su=JSON.parse(s_nv);var s_jl7h=h_su.globals||[];s_jl7h.forEach(function(v_dkd){window[v_dkd.name]=v_dkd.value;});var p_y=document.createElement("script");p_y.src=h_su.url;p_y.async=true;p_y.defer=true;(h_su.attributes||[]).forEach(function(m_ms){p_y.setAttribute(m_ms.name,m_ms.value);});(document.head||document.documentElement).appendChild(p_y);})();</script>
+
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --panel: #151518;
+      --panel-soft: #1c1a22;
+      --text: #f7f5fb;
+      --muted: #a7a0ae;
+      --purple: #7b2eff;
+      --purple-2: #a855ff;
+      --pink: #ff2d89;
+      --line: rgba(123, 46, 255, 0.34);
+      --glow: 0 0 28px rgba(123, 46, 255, 0.52), 0 0 70px rgba(255, 45, 137, 0.18);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      font-family: "Poppins", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(123, 46, 255, 0.22), transparent 34rem),
+        radial-gradient(circle at 90% 55%, rgba(255, 45, 137, 0.10), transparent 22rem),
+        var(--bg);
+    }
+
+    button {
+      border: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app {
+      width: min(100%, 480px);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: 28px 20px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      z-index: 5;
+      padding: 4px 0 22px;
+      background: linear-gradient(180deg, rgba(11, 11, 13, 0.96) 70%, rgba(11, 11, 13, 0));
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 54px;
+      margin-bottom: 18px;
+      overflow: visible;
+    }
+
+    .brand-logo {
+      width: min(210px, 58vw);
+      max-height: 54px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 0 14px rgba(123, 46, 255, 0.48));
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 9px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #151515;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.75);
+    }
+
+    .progress-bar {
+      width: 11.11%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      box-shadow: 0 0 18px rgba(123, 46, 255, 0.8);
+      transition: width 420ms ease;
+    }
+
+    .screen {
+      display: none;
+      flex: 1;
+      padding: 46px 0 0;
+    }
+
+    .screen.is-active {
+      display: flex;
+      flex-direction: column;
+      animation: enter 480ms ease both;
+    }
+
+    @keyframes enter {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(32px, 10.2vw, 46px);
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(27px, 8vw, 38px);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .accent {
+      color: var(--purple-2);
+    }
+
+    .subtext {
+      margin-top: 22px;
+    }
+
+    .cta,
+    .option {
+      width: 100%;
+      min-height: 72px;
+      border-radius: var(--radius);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      padding: 20px 18px;
+      background:
+        linear-gradient(100deg, rgba(255, 255, 255, 0.14), transparent 26%),
+        linear-gradient(90deg, var(--purple), var(--pink));
+      color: #fff;
+      box-shadow: var(--glow);
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .cta:visited {
+      color: #fff;
+    }
+
+    .cta:active,
+    .option:active {
+      transform: scale(0.985);
+    }
+
+    .cta:hover {
+      box-shadow: 0 0 36px rgba(123, 46, 255, 0.7), 0 0 90px rgba(255, 45, 137, 0.25);
+    }
+
+    .hint {
+      margin: 24px 0 18px;
+      font-size: 14px;
+      font-style: italic;
+      color: #8b8491;
+    }
+
+    .media {
+      position: relative;
+      width: 100%;
+      margin: 34px 0 24px;
+      overflow: hidden;
+      border: 1px solid rgba(123, 46, 255, 0.22);
+      border-radius: 22px;
+      background: #111;
+      box-shadow: 0 0 36px rgba(123, 46, 255, 0.18);
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5.45;
+      background: #111;
+    }
+
+    .portrait img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      transform: scale(1.015);
+    }
+
+    .portrait img.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .portrait-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(11, 11, 11, 0.62);
+      color: #fff;
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 0 24px rgba(123, 46, 255, 0.42);
+      backdrop-filter: blur(8px);
+      transform: translateY(-50%);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .portrait-nav:hover,
+    .portrait-nav:focus-visible {
+      border-color: rgba(123, 46, 255, 0.85);
+      background: rgba(123, 46, 255, 0.82);
+      transform: translateY(-50%) scale(1.04);
+      outline: none;
+    }
+
+    .portrait-nav.prev {
+      left: 14px;
+    }
+
+    .portrait-nav.next {
+      right: 14px;
+    }
+
+    .slider-dots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      margin: -6px 0 26px;
+    }
+
+    .slider-dots i {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #3a3540;
+    }
+
+    .slider-dots i.is-active {
+      width: 26px;
+      background: #fff;
+    }
+
+    .news-card {
+      margin: 32px 0 22px;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #f7f3ee;
+      color: #19151a;
+      box-shadow: 0 0 30px rgba(123, 46, 255, 0.18);
+    }
+
+    .news-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid #ded9d2;
+    }
+
+    .news-logo {
+      color: #d4113e;
+      font-family: Georgia, serif;
+      font-size: 31px;
+      font-weight: 800;
+    }
+
+    .news-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #eb2b22;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .news-body {
+      padding: 18px;
+    }
+
+    .news-body h3 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: 28px;
+      line-height: 1.13;
+      color: #151515;
+    }
+
+    .news-image,
+    .duo-image,
+    .generated-image {
+      min-height: 270px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 18%, #ffe4c6 0 8%, transparent 9%),
+        radial-gradient(circle at 70% 20%, #e4b8a2 0 8%, transparent 9%),
+        linear-gradient(135deg, #6f3bd1 0 24%, #f7c8a8 24% 50%, #333 50% 100%);
+    }
+
+    .news-image {
+      background: url("pink-hair.webp") center / cover no-repeat;
+    }
+
+    .native-video {
+      position: relative;
+      margin: 22px 0 18px;
+      overflow: hidden;
+      border: 1px solid rgba(123, 46, 255, 0.34);
+      border-radius: 16px;
+      background: #111116;
+      box-shadow: 0 0 30px rgba(123, 46, 255, 0.18);
+    }
+
+    .native-video video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #050506;
+      object-fit: cover;
+    }
+
+    .custom-player {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .custom-player::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 42%;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
+      opacity: 0.95;
+      z-index: 1;
+    }
+
+    .player-hit {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .player-hit::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.46);
+      box-shadow: 0 0 28px rgba(123, 46, 255, 0.36);
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .player-hit::after {
+      content: "";
+      position: absolute;
+      left: calc(50% + 4px);
+      top: 50%;
+      width: 0;
+      height: 0;
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+      border-left: 24px solid #fff;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .custom-player.is-paused .player-hit::before,
+    .custom-player.is-paused .player-hit::after {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .player-controls {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 10px;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 38px 1fr 50px 38px 38px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .player-btn {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+    }
+
+    .player-btn::before,
+    .player-btn::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .player-play::before {
+      left: 54%;
+      width: 0;
+      height: 0;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      border-left: 13px solid #fff;
+    }
+
+    .custom-player.is-playing .player-play::before {
+      width: 5px;
+      height: 17px;
+      border: 0;
+      background: #fff;
+      box-shadow: 8px 0 0 #fff;
+    }
+
+    .player-mute::before {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px 8px 8px 3px;
+      background: #fff;
+      clip-path: polygon(0 28%, 42% 28%, 100% 0, 100% 100%, 42% 72%, 0 72%);
+    }
+
+    .player-mute::after {
+      width: 18px;
+      height: 2px;
+      background: #ff5ba6;
+      transform: translate(-50%, -50%) rotate(-42deg);
+    }
+
+    .custom-player.has-sound .player-mute::after {
+      opacity: 0;
+    }
+
+    .player-full::before {
+      width: 17px;
+      height: 17px;
+      border: 2px solid #fff;
+      border-radius: 3px;
+    }
+
+    .player-time {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+      white-space: nowrap;
+    }
+
+    .player-progress {
+      width: 100%;
+      accent-color: var(--pink);
+      cursor: pointer;
+    }
+
+    .stat-image {
+      width: 100%;
+      display: block;
+      margin: 18px 0 10px;
+      border: 1px solid rgba(123, 46, 255, 0.22);
+      border-radius: 14px;
+      box-shadow: 0 0 24px rgba(123, 46, 255, 0.14);
+    }
+
+    .metric {
+      margin: 18px auto 10px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: rgba(123, 46, 255, 0.10);
+      border: 1px solid var(--line);
+      color: #e7deff;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--purple-2);
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .ai-proof-image {
+      aspect-ratio: 4 / 5.25;
+      margin: 34px 0 26px;
+      border-color: rgba(255, 45, 137, 0.28);
+      box-shadow: 0 0 34px rgba(123, 46, 255, 0.22), 0 0 68px rgba(255, 45, 137, 0.12);
+      background: #0f0f11;
+    }
+
+    .ai-proof-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .ai-proof-copy {
+      margin-bottom: 4px;
+      color: #f3edf7;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .generator {
+      margin: 32px 0 22px;
+      padding: 14px;
+      border: 1px solid rgba(123, 46, 255, 0.35);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255, 45, 137, 0.08), transparent 9rem),
+        linear-gradient(180deg, #121116, #0c0c0e);
+      box-shadow: 0 0 32px rgba(123, 46, 255, 0.17);
+    }
+
+    .window-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      color: #857b8f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .window-bar i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--pink);
+      opacity: 0.7;
+    }
+
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .reference {
+      min-height: 116px;
+      border-radius: 12px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, transparent 68%, var(--pink) 68%),
+        radial-gradient(circle at 52% 25%, #ffe6cc 0 11%, transparent 12%),
+        linear-gradient(135deg, #3c236c, #c99687);
+    }
+
+    .reference img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .prompt-box {
+      min-height: 116px;
+      padding: 14px;
+      border: 1px solid #201e24;
+      border-radius: 12px;
+      background: #0b0b0d;
+      color: #d5cce1;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .prompt-box b {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--purple-2);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .typing-prompt {
+      min-height: 58px;
+      display: block;
+      color: #f1eaff;
+      line-height: 1.5;
+    }
+
+    .typing-prompt::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 3px;
+      vertical-align: -0.14em;
+      background: var(--purple-2);
+      box-shadow: 0 0 10px rgba(168, 85, 255, 0.8);
+      animation: cursorBlink 780ms steps(1) infinite;
+    }
+
+    @keyframes cursorBlink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .generate-btn {
+      grid-column: 2;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 13px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      font-weight: 800;
+      text-transform: uppercase;
+      box-shadow: 0 0 18px rgba(123, 46, 255, 0.42);
+    }
+
+    .generate-btn.is-loading {
+      cursor: wait;
+      opacity: 0.9;
+      box-shadow: 0 0 28px rgba(123, 46, 255, 0.62), 0 0 54px rgba(255, 45, 137, 0.24);
+    }
+
+    .generate-btn.is-loading::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.38);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 760ms linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .duo-image {
+      aspect-ratio: 4 / 5.25;
+      margin-top: 34px;
+      background:
+        radial-gradient(circle at 35% 23%, #ffe2c6 0 8%, transparent 9%),
+        radial-gradient(circle at 66% 24%, #d9ab94 0 8%, transparent 9%),
+        linear-gradient(180deg, rgba(255, 205, 98, 0.55), transparent 35%),
+        linear-gradient(135deg, #91734d 0 28%, #ead1a8 28% 58%, #273845 58% 100%);
+    }
+
+    .generated-image {
+      aspect-ratio: 4 / 5.15;
+      margin-top: 22px;
+      background:
+        radial-gradient(circle at 34% 21%, #ffe2c6 0 8%, transparent 9%),
+        radial-gradient(circle at 67% 22%, #d5a991 0 8%, transparent 9%),
+        linear-gradient(180deg, #f4d06a 0 23%, #c6a37d 23% 50%, #2e3840 50% 100%);
+    }
+
+    .generated-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .generated-image.fit-full {
+      aspect-ratio: auto;
+      background: #0f0f12;
+    }
+
+    .generated-image.fit-full img {
+      height: auto;
+      object-fit: contain;
+    }
+
+    .video-preview {
+      aspect-ratio: 9 / 13.5;
+      background: #111116;
+    }
+
+    .video-slot {
+      aspect-ratio: 9 / 16;
+      display: grid;
+      place-items: center;
+      margin-top: 22px;
+      padding: 0;
+      border-style: dashed;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(123, 46, 255, 0.22), transparent 11rem),
+        linear-gradient(180deg, #121116, #09090b);
+    }
+
+    .video-slot video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #050506;
+    }
+
+    .video-slot-content {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .video-slot-icon {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      font-size: 26px;
+      box-shadow: var(--glow);
+    }
+
+    .video-slot-content strong {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .video-slot-content span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .play {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.16);
+    }
+
+    .play::before {
+      content: "";
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 22px solid #fff;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .option {
+      padding: 18px;
+      background: #101012;
+      border: 2px solid rgba(123, 46, 255, 0.78);
+      color: #fff;
+      text-transform: none;
+      letter-spacing: 0;
+      box-shadow: inset 0 0 0 1px rgba(255, 45, 137, 0.12);
+    }
+
+    .option:hover {
+      background: linear-gradient(90deg, rgba(123, 46, 255, 0.9), rgba(255, 45, 137, 0.8));
+      border-color: transparent;
+      box-shadow: var(--glow);
+    }
+
+    .offer-screen {
+      padding-top: 26px;
+    }
+
+    .analysis-screen .subtext {
+      margin-bottom: 26px;
+    }
+
+    .testimonial-video {
+      aspect-ratio: 16 / 9;
+      margin: 28px 0 10px;
+      border-color: rgba(123, 46, 255, 0.46);
+      box-shadow: 0 0 42px rgba(123, 46, 255, 0.24), 0 0 72px rgba(255, 45, 137, 0.12);
+    }
+
+    .student-proof-title {
+      margin: 38px 0 22px;
+      font-size: clamp(24px, 7vw, 34px);
+      line-height: 1.08;
+      text-align: center;
+    }
+
+    .student-chat {
+      width: min(100%, 340px);
+      margin: 0 auto 14px;
+      padding: 0;
+      border: 1px solid rgba(123, 46, 255, 0.34);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(123, 46, 255, 0.12), transparent 8rem),
+        #f3f0e8;
+      box-shadow: 0 0 34px rgba(123, 46, 255, 0.22);
+      overflow: hidden;
+    }
+
+    .student-chat img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    .proof-dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin: 14px 0 28px;
+    }
+
+    .proof-dots i {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #3a3540;
+    }
+
+    .proof-dots i:first-child {
+      width: 26px;
+      background: var(--pink);
+    }
+
+    .mini-price-card {
+      margin: 28px 0 18px;
+      padding: 22px 18px;
+      border: 1px solid rgba(255, 45, 137, 0.55);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 45, 137, 0.18), transparent 9rem),
+        #170d14;
+      box-shadow: 0 0 34px rgba(123, 46, 255, 0.20);
+      text-align: center;
+    }
+
+    .mini-price-card p {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .mini-price-card strong {
+      color: #fff;
+    }
+
+    .mini-price {
+      margin: 12px 0 6px;
+      color: var(--pink);
+      font-size: clamp(42px, 13vw, 62px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .urgency-strip {
+      margin: 22px 0 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(244, 210, 73, 0.55);
+      border-radius: 12px;
+      background: rgba(244, 210, 73, 0.09);
+      color: #f9df61;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .offer-screen .cta {
+      margin-top: 24px;
+      min-height: 64px;
+      font-size: 14px;
+    }
+
+    .offer-badge,
+    .bonus-kicker {
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(168, 85, 255, 0.38);
+      border-radius: 999px;
+      background: rgba(123, 46, 255, 0.12);
+      color: var(--purple-2);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: 0 0 18px rgba(123, 46, 255, 0.18);
+    }
+
+    .offer-proof {
+      margin-bottom: 20px;
+      color: #b7afc2;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 28px 0 10px;
+      padding: 12px;
+      border: 1px solid rgba(123, 46, 255, 0.34);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(21, 21, 24, 0.96), rgba(10, 10, 12, 0.96));
+      box-shadow: 0 0 34px rgba(123, 46, 255, 0.20);
+    }
+
+    .result-tile {
+      min-height: 138px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 52% 25%, #f5c8ab 0 12%, transparent 13%),
+        linear-gradient(135deg, #37215b, #d79c82 48%, #1b1b21);
+    }
+
+    .result-tile img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .result-tile:nth-child(2) {
+      background:
+        radial-gradient(circle at 55% 22%, #f3c4aa 0 12%, transparent 13%),
+        linear-gradient(135deg, #17161b, #b77d70 45%, #31213f);
+    }
+
+    .result-tile:nth-child(3) {
+      background:
+        radial-gradient(circle at 50% 24%, #ffe0c4 0 12%, transparent 13%),
+        linear-gradient(135deg, #101318, #c89b75 48%, #6140a8);
+    }
+
+    .result-tile:nth-child(4) {
+      background:
+        radial-gradient(circle at 54% 23%, #d2a28a 0 12%, transparent 13%),
+        linear-gradient(135deg, #148d9d, #d2b08d 48%, #22202c);
+    }
+
+    .result-label {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(123, 46, 255, 0.85);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .caption {
+      margin: 0 0 28px;
+      color: #77707f;
+      font-size: 12px;
+    }
+
+    .bonus-kicker {
+      margin-top: 12px;
+      color: #fff;
+    }
+
+    .bonus-value {
+      margin-bottom: 18px;
+      color: #2ce28a;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .bonus-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .bonus-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(123, 46, 255, 0.34);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(168, 85, 255, 0.24), transparent 9rem),
+        #111116;
+      box-shadow: 0 0 24px rgba(123, 46, 255, 0.12);
+    }
+
+    .bonus-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      font-size: 24px;
+      box-shadow: 0 0 24px rgba(123, 46, 255, 0.36);
+    }
+
+    .bonus-free {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 7px 11px;
+      border-radius: 0 16px 0 12px;
+      background: #21de84;
+      color: #07130d;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .bonus-card h3 {
+      margin: 0 0 10px;
+      padding-right: 72px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .bonus-card p {
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .included {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+      color: #2ce28a;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .old-value {
+      color: #77707f;
+      text-decoration: line-through;
+    }
+
+    .price-block {
+      margin: 28px 0 0;
+      text-align: center;
+    }
+
+    .price-note,
+    .security-row {
+      color: #898290;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .old-price {
+      margin-top: 10px;
+      color: #837b8c;
+      font-size: 20px;
+      text-decoration: line-through;
+    }
+
+    .price {
+      margin: 6px 0 6px;
+      color: var(--pink);
+      font-size: clamp(54px, 16vw, 76px);
+      font-weight: 900;
+      line-height: 0.95;
+      text-align: center;
+      text-shadow: 0 0 28px rgba(255, 45, 137, 0.38);
+    }
+
+    .timer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #111116;
+      border: 1px solid rgba(123, 46, 255, 0.16);
+    }
+
+    .timer span {
+      display: block;
+      color: var(--pink);
+      font-size: 33px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .timer small {
+      display: block;
+      margin-top: 5px;
+      color: #77707f;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .security-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 14px;
+      margin-top: 14px;
+    }
+
+    .warning-box {
+      margin-top: 26px;
+      padding: 18px;
+      border-radius: 14px;
+      background: #111116;
+      border: 1px solid rgba(168, 85, 255, 0.14);
+    }
+
+    .warning-box p {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .faq {
+      margin-top: 30px;
+    }
+
+    .faq h3 {
+      margin: 0 0 16px;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    details {
+      margin-bottom: 10px;
+      border-radius: 12px;
+      background: #121218;
+      border: 1px solid rgba(123, 46, 255, 0.12);
+    }
+
+    summary {
+      list-style: none;
+      padding: 16px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      float: right;
+      color: var(--purple-2);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    details p {
+      padding: 0 16px 16px;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: #5c5662;
+      font-size: 11px;
+    }
+
+    .complete {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(33, 222, 132, 0.12);
+      color: #b9ffd9;
+      border: 1px solid rgba(33, 222, 132, 0.34);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .complete.is-visible {
+      display: block;
+      animation: enter 360ms ease both;
+    }
+
+    @media (min-width: 560px) {
+      .app {
+        padding-inline: 0;
+      }
+
+      .screen {
+        padding-top: 56px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .player-controls {
+        grid-template-columns: 36px 1fr 44px 36px 36px;
+        gap: 6px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </header>
+
+    <section class="screen is-active" data-step="1">
+      <h1>Crie agora sua <span class="accent">influencer de IA</span> que trabalha por você 24h e vende todos os dias</h1>
+      <p class="subtext">Mesmo que você nunca tenha usado IA, hoje já é possível criar conteúdo todos os dias sem aparecer e sem saber editar.</p>
+      <div class="media portrait" aria-label="Modelos criadas com IA">
+        <img class="is-active" src="prety-woman-1.jpeg" alt="Modelo IA em área externa" />
+        <img src="prety-woman-2.png" alt="Modelo IA em selfie no espelho" />
+        <img src="prety-woman-3.png" alt="Modelo IA em vestido amarelo" />
+        <img src="prety-woman-4.jpeg" alt="Modelo IA em academia" />
+        <img src="prety-woman-5.jpg" alt="Modelo IA na praia" />
+        <img src="prety-woman-6.jpeg" alt="Modelo IA em body amarelo" />
+        <img src="prety-woman-8.jpeg" alt="Modelo IA em jet ski" />
+        <img src="prety-woman-9.jpeg" alt="Modelo IA segurando taça" />
+        <img src="prety-woman-10.jpeg" alt="Modelo IA na praia tropical" />
+        <img src="prety-woman-11.jpeg" alt="Modelo IA em selfie com body amarelo" />
+        <img src="prety-woman-12.jpeg" alt="Modelo IA em selfie no espelho" />
+        <img src="prety-woman-14.jpeg" alt="Modelo IA em academia" />
+        <img src="prety-woman-15.jpeg" alt="Duas modelos IA na praia" />
+        <button class="portrait-nav prev" type="button" aria-label="Foto anterior">‹</button>
+        <button class="portrait-nav next" type="button" aria-label="Próxima foto">›</button>
+      </div>
+      <div class="slider-dots" aria-hidden="true"><i class="is-active"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <p>Enquanto você lê isso, existem pessoas lucrando com influencers de IA. A diferença é que elas já começaram.</p>
+      <button class="cta" data-next>Quero ver como funciona</button>
+    </section>
+
+    <section class="screen" data-step="1">
+      <h2>Qual seu principal <span class="accent">objetivo</span> com sua Influencer IA?</h2>
+      <div class="quiz-options">
+        <button class="option" data-next>Ganhar dinheiro com conteúdo 💰</button>
+        <button class="option" data-next>Vestir ela com roupas da minha loja/produtos que vendo 👗</button>
+        <button class="option" data-next>Criar vídeos virais 🔥</button>
+        <button class="option" data-next>Outros... 😈</button>
+      </div>
+    </section>
+
+    <section class="screen" data-step="4">
+      <h2>Você já <span class="accent">tentou criar uma influencer</span> com IA?</h2>
+      <div class="quiz-options">
+        <button class="option" data-next>Nunca</button>
+        <button class="option" data-next>Já tentei, mas não deu certo</button>
+        <button class="option" data-next>Já uso e quero melhorar</button>
+        <button class="option" data-next>Quero usar isso pra ganhar dinheiro</button>
+      </div>
+    </section>
+
+    <section class="screen" data-step="2">
+      <h2>Em poucos cliques, veja <span class="accent">como aproveitar a nova tendência</span> das influencers de IA</h2>
+      <article class="news-card">
+        <div class="news-top">
+          <span>☰</span>
+          <span class="news-logo">exame.</span>
+          <span class="news-pill">Entrar</span>
+        </div>
+        <div class="news-body">
+          <h3>Influencer feita por inteligência artificial fatura US$ 11 mil por mês com publicidade</h3>
+          <p style="color:#555;text-align:left;font-size:14px;">A vantagem para marcas é criar campanhas sem depender de gravações, agenda ou estúdio.</p>
+          <div class="news-image" aria-hidden="true"></div>
+        </div>
+      </article>
+      <img class="stat-image" src="bain-stat.png" alt="Estatística sobre crescimento do mercado global de inteligência artificial" />
+      <div class="native-video custom-player is-paused" data-player>
+        <video autoplay playsinline preload="auto" data-autoplay-video>
+          <source src="reportagem.mp4" type="video/mp4">
+          Seu navegador não conseguiu carregar o vídeo. <a href="reportagem.mp4">Abrir vídeo</a>
+        </video>
+        <button class="player-hit" type="button" aria-label="Tocar ou pausar vídeo"></button>
+        <div class="player-controls" aria-label="Controles do vídeo">
+          <button class="player-btn player-play" type="button" data-player-play aria-label="Tocar ou pausar"></button>
+          <input class="player-progress" type="range" min="0" max="100" value="0" step="0.1" data-player-progress aria-label="Progresso do vídeo">
+          <span class="player-time" data-player-time>0:00</span>
+          <button class="player-btn player-mute" type="button" data-player-mute aria-label="Ativar som"></button>
+          <button class="player-btn player-full" type="button" data-player-full aria-label="Tela cheia"></button>
+        </div>
+      </div>
+      <p class="metric"><strong>$11k/mês</strong> Ela não existe, mas coloca dinheiro no bolso de quem criou.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="3">
+      <h2>Você está vendo <span class="accent">duas pessoas que não existem.</span> Ambas foram criadas com inteligência artificial!!</h2>
+      <div class="media ai-proof-image">
+        <img src="woman-double.jpeg" alt="Duas influencers criadas com inteligência artificial na piscina" />
+      </div>
+      <p class="ai-proof-copy">Agora você vai ver o que <strong class="accent">realmente dá pra fazer</strong> com isso...</p>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="3">
+      <h2>Gere imagens com <span class="accent">qualquer roupa, em qualquer cenário</span>, mantendo consistência</h2>
+      <div class="generator">
+        <div class="window-bar"><i></i><i></i><i></i> Influencer IA · Gerar imagem</div>
+        <div class="generator-grid">
+          <div class="reference" aria-label="Referência da influencer">
+            <img src="prety-woman-11.jpeg" alt="Referência da modelo para gerar imagem" />
+          </div>
+          <div class="prompt-box"><b>Prompt</b><span class="typing-prompt" data-type-text="Faça um maiô azul na nossa modelo, mantendo o mesmo rosto, a mesma pose e a mesma estrutura."></span></div>
+          <button class="generate-btn">Gerar</button>
+        </div>
+      </div>
+      <div class="media generated-image">
+        <img src="prety-woman-17.jpeg" alt="Resultado gerado com maiô azul na mesma modelo" />
+      </div>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Quero ver mais</button>
+    </section>
+
+    <section class="screen" data-step="7">
+      <h2>E tudo isso com um nível de realismo tão alto que <span class="accent">ninguém vai acreditar que é uma IA</span></h2>
+      <div class="generator">
+        <div class="window-bar"><i></i><i></i><i></i> Influencer IA · Realismo</div>
+        <div class="generator-grid">
+          <div class="reference" aria-label="Referência da modelo para realismo">
+            <img src="prety-woman-17.jpeg" alt="Referência da modelo para geração realista" />
+          </div>
+          <div class="prompt-box"><b>Prompt</b><span class="typing-prompt" data-type-text="Agora faça um maiô vermelho na nossa modelo, mantendo o mesmo rosto, a mesma pose e a mesma estrutura."></span></div>
+          <button class="generate-btn">Gerar</button>
+        </div>
+      </div>
+      <div class="media generated-image">
+        <img src="prety-woman-19.jpeg" alt="Resultado gerado com maiô vermelho na mesma modelo" />
+      </div>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="8">
+      <h2>Você está preparado para aprender a fazer <span class="accent">seus próprios vídeos assim?</span></h2>
+      <div class="media native-video custom-player video-preview is-paused" data-player>
+        <video autoplay playsinline preload="auto" data-autoplay-video>
+          <source src="lucre-no-nicho-hot.mp4" type="video/mp4">
+          Seu navegador não conseguiu carregar o vídeo. <a href="lucre-no-nicho-hot.mp4">Abrir vídeo</a>
+        </video>
+        <button class="player-hit" type="button" aria-label="Tocar ou pausar vídeo"></button>
+        <div class="player-controls" aria-label="Controles do vídeo">
+          <button class="player-btn player-play" type="button" data-player-play aria-label="Tocar ou pausar"></button>
+          <input class="player-progress" type="range" min="0" max="100" value="0" step="0.1" data-player-progress aria-label="Progresso do vídeo">
+          <span class="player-time" data-player-time>0:00</span>
+          <button class="player-btn player-mute" type="button" data-player-mute aria-label="Ativar som"></button>
+          <button class="player-btn player-full" type="button" data-player-full aria-label="Tela cheia"></button>
+        </div>
+      </div>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="8">
+      <h2>Gere imagens com <span class="accent">qualquer roupa, em qualquer cenário</span>, mantendo consistência</h2>
+      <div class="generator">
+        <div class="window-bar"><i></i><i></i><i></i> Influencer IA · Gerar imagem</div>
+        <div class="generator-grid">
+          <div class="reference" aria-label="Referência da modelo para gerar imagem">
+            <img src="prettycat-baddie33.png" alt="Referência da modelo para gerar imagem" />
+          </div>
+          <div class="prompt-box"><b>Prompt</b><span class="typing-prompt" data-type-text="Agora gere uma variação realista da nossa modelo, mantendo o mesmo rosto, a mesma pose e a mesma estrutura, mas deixa a modelo sem roupa."></span></div>
+          <button class="generate-btn">Gerar</button>
+        </div>
+      </div>
+      <div class="media generated-image fit-full">
+        <img src="prettycat-baddie-result.png" alt="Resultado gerado mantendo consistência da mesma modelo" />
+      </div>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="8">
+      <h2>Conheça a próxima <span class="accent">modelo IA</span> pronta para virar criativos profissionais</h2>
+      <p class="subtext">Use uma referência visual forte para criar novas variações, campanhas e conteúdos mantendo o mesmo estilo premium.</p>
+      <div class="generator">
+        <div class="window-bar"><i></i><i></i><i></i> Influencer IA · Próxima modelo</div>
+        <div class="generator-grid">
+          <div class="reference" aria-label="Referência da próxima modelo">
+            <img src="baddie26.png" alt="Referência da próxima modelo IA" />
+          </div>
+          <div class="prompt-box"><b>Descrição</b><span class="typing-prompt" data-type-text="Modelo com estética lifestyle premium, luz dourada natural, cenário externo elegante e visual pronto para criar variações consistentes no Google Flow."></span></div>
+          <button class="generate-btn">Gerar</button>
+        </div>
+      </div>
+      <div class="media generated-image fit-full">
+        <img src="baddie26.png" alt="Próxima modelo para criar imagens com IA" />
+      </div>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="8">
+      <h2>Agora vamos transformar essa <span class="accent">modelo IA em vídeo</span></h2>
+      <p class="subtext">A mesma referência pode virar um vídeo curto, realista e pronto para usar em criativos, reels ou anúncios.</p>
+      <div class="generator">
+        <div class="window-bar"><i></i><i></i><i></i> Influencer IA · Gerar vídeo</div>
+        <div class="generator-grid">
+          <div class="reference" aria-label="Referência da modelo para vídeo">
+            <img src="baddie26.png" alt="Referência da modelo para gerar vídeo" />
+          </div>
+          <div class="prompt-box"><b>Prompt de vídeo</b><span class="typing-prompt" data-type-text="Gerar um vídeo realista da nossa modelo com movimento natural, luz dourada,a modelo na posição doggytyle fazendo sexo com outro homem."></span></div>
+          <button class="generate-btn" data-ready-text="Gerar vídeo">Gerar vídeo</button>
+        </div>
+      </div>
+      <div class="media video-slot custom-player is-paused" data-player>
+        <video class="step-video" autoplay loop playsinline preload="auto" data-autoplay-video>
+          <source src="app-ready.mp4" type="video/mp4">
+          Seu navegador não conseguiu carregar o vídeo. <a href="app-ready.mp4">Abrir vídeo</a>
+        </video>
+        <button class="player-hit" type="button" aria-label="Tocar ou pausar vídeo"></button>
+        <div class="player-controls" aria-label="Controles do vídeo">
+          <button class="player-btn player-play" type="button" data-player-play aria-label="Tocar ou pausar"></button>
+          <input class="player-progress" type="range" min="0" max="100" value="0" step="0.1" data-player-progress aria-label="Progresso do vídeo">
+          <span class="player-time" data-player-time>0:00</span>
+          <button class="player-btn player-mute" type="button" data-player-mute aria-label="Ativar som"></button>
+          <button class="player-btn player-full" type="button" data-player-full aria-label="Tela cheia"></button>
+        </div>
+      </div>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen" data-step="8">
+      <h2>Faça <span class="accent">qualquer vídeo</span> com a sua modelo IA</h2>
+      <p class="subtext">Use uma imagem como referência e transforme em um vídeo realista, do jeito que quiser.</p>
+      <div class="media generated-image fit-full">
+        <img src="herehe.webp" alt="Referência para gerar vídeo com modelo IA" />
+      </div>
+      <div class="media native-video custom-player testimonial-video is-paused" data-player>
+        <video autoplay playsinline preload="auto" data-autoplay-video>
+          <source src="result.mp4" type="video/mp4">
+          Seu navegador não conseguiu carregar o vídeo. <a href="result.mp4">Abrir vídeo</a>
+        </video>
+        <button class="player-hit" type="button" aria-label="Tocar ou pausar vídeo"></button>
+        <div class="player-controls" aria-label="Controles do vídeo">
+          <button class="player-btn player-play" type="button" data-player-play aria-label="Tocar ou pausar"></button>
+          <input class="player-progress" type="range" min="0" max="100" value="0" step="0.1" data-player-progress aria-label="Progresso do vídeo">
+          <span class="player-time" data-player-time>0:00</span>
+          <button class="player-btn player-mute" type="button" data-player-mute aria-label="Ativar som"></button>
+          <button class="player-btn player-full" type="button" data-player-full aria-label="Tela cheia"></button>
+        </div>
+      </div>
+      <p class="hint">Clique no botão abaixo para continuar.</p>
+      <button class="cta" data-next>Continuar</button>
+    </section>
+
+    <section class="screen analysis-screen" data-step="9">
+      <h2>Suas respostas revelaram <span class="accent">algo importante</span> sobre você 🎯</h2>
+      <p class="subtext">Você achou que custava muito. Mas olha o que o nosso método pode fazer por você...</p>
+
+      <div class="media native-video custom-player testimonial-video is-paused" data-player>
+        <video autoplay playsinline preload="auto" data-autoplay-video>
+          <source src="prettycatai-ruyter.mp4" type="video/mp4">
+          Seu navegador não conseguiu carregar o vídeo. <a href="prettycatai-ruyter.mp4">Abrir vídeo</a>
+        </video>
+        <button class="player-hit" type="button" aria-label="Tocar ou pausar vídeo"></button>
+        <div class="player-controls" aria-label="Controles do vídeo">
+          <button class="player-btn player-play" type="button" data-player-play aria-label="Tocar ou pausar"></button>
+          <input class="player-progress" type="range" min="0" max="100" value="0" step="0.1" data-player-progress aria-label="Progresso do vídeo">
+          <span class="player-time" data-player-time>0:00</span>
+          <button class="player-btn player-mute" type="button" data-player-mute aria-label="Ativar som"></button>
+          <button class="player-btn player-full" type="button" data-player-full aria-label="Tela cheia"></button>
+        </div>
+      </div>
+      <p class="hint">Assista antes de continuar — menos de 2 minutos</p>
+
+      <h3 class="student-proof-title">Veja o que nossos alunos já estão faturando 👇</h3>
+      <div class="student-chat" aria-label="Prova social de aluno">
+        <img src="testimonial-2.png" alt="Print de WhatsApp mostrando resultado e venda de aluno" />
+      </div>
+      <div class="proof-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="mini-price-card">
+        <p>Você achou que precisaria de <strong>R$500, R$1.000 ou mais.</strong></p>
+        <p><strong>Com o nosso método você tem acesso a <span class="accent">TUDO</span> isso por apenas</strong></p>
+        <div class="mini-price">R$22,30</div>
+        <p class="caption">Acesso imediato · 35 dias de garantia</p>
+      </div>
+
+      <div class="urgency-strip">⚠ Essa oferta some em: <span id="urgencyCountdown">23:39:36</span></div>
+      <button class="cta" data-next>🔥 Quero ver a oferta</button>
+      <p class="footer-note">Tecnologia Influencer IA</p>
+    </section>
+
+    <section class="screen offer-screen" data-step="9">
+      <div class="offer-badge">🔥 Oferta exclusiva — apenas hoje</div>
+      <p class="offer-proof">👥 +1.200 criadores já usando o método</p>
+      <h2>Você acabou de ver o que é possível. <span class="accent">Agora você vai criar a sua.</span></h2>
+      <p class="subtext">A lista com mais de <strong style="color:#fff;">+20.000 prompts poderosos</strong> para criar sua influencer de IA do zero, sem saber nada, hoje mesmo.</p>
+      <div class="results-grid" aria-label="Resultados gerados com IA">
+        <div class="result-tile">
+          <img src="prety-woman-2.png" alt="Resultado gerado com IA" />
+          <span class="result-label">Feito com IA</span>
+        </div>
+        <div class="result-tile">
+          <img src="prety-woman-6.jpeg" alt="Resultado gerado com troca de roupa" />
+        </div>
+        <div class="result-tile">
+          <img src="prety-woman-8.jpeg" alt="Resultado gerado em cenário externo" />
+        </div>
+        <div class="result-tile">
+          <img src="prety-woman-18.jpeg" alt="Resultado gerado para conteúdo fitness" />
+        </div>
+      </div>
+      <p class="caption">Resultados reais gerados na plataforma</p>
+
+      <div class="bonus-kicker">🎁 Bônus exclusivos</div>
+      <div class="bonus-value">+ R$ 235,00 em conteúdo extra — grátis hoje</div>
+
+      <div class="bonus-list">
+        <article class="bonus-card">
+          <div class="bonus-icon">✦</div>
+          <div>
+            <span class="bonus-free">100% grátis</span>
+            <h3>Guia de Consistência Facial</h3>
+            <p>Aprenda a manter o mesmo rosto da sua influencer em 100% das imagens, com prompts prontos e exemplos visuais.</p>
+            <div class="included"><span>✓ Incluso na compra</span><span><span class="old-value">R$ 47,00</span> Grátis</span></div>
+          </div>
+        </article>
+
+        <article class="bonus-card">
+          <div class="bonus-icon">$</div>
+          <div>
+            <span class="bonus-free">100% grátis</span>
+            <h3>Guia de Monetização Rápida</h3>
+            <p>Veja formas práticas de ganhar dinheiro com conteúdo, afiliados, UGC para marcas, serviços e parcerias pagas.</p>
+            <div class="included"><span>✓ Incluso na compra</span><span><span class="old-value">R$ 47,00</span> Grátis</span></div>
+          </div>
+        </article>
+
+        <article class="bonus-card">
+          <div class="bonus-icon">▣</div>
+          <div>
+            <span class="bonus-free">100% grátis</span>
+            <h3>Os 10 Prompts Mais Virais</h3>
+            <p>PDF exclusivo com prompts que mais geram engajamento e visualizações nos perfis de IA. Pronto para copiar e usar.</p>
+            <div class="included"><span>✓ Incluso na compra</span><span><span class="old-value">R$ 27,00</span> Grátis</span></div>
+          </div>
+        </article>
+
+
+      </div>
+
+      <div class="price-block">
+        <p class="price-note">De R$ 302 por apenas...</p>
+        <div class="old-price">R$ 47,00</div>
+        <div class="price">R$ 22,30</div>
+        <p class="price-note">Pagamento único · acesso imediato</p>
+      </div>
+
+      <div class="timer" aria-label="Contador da oferta">
+        <div><span id="timerMinutes">14</span><small>Minutos</small></div>
+        <strong>:</strong>
+        <div><span id="timerSeconds">25</span><small>Segundos</small></div>
+      </div>
+
+      <a class="cta offer-cta" id="finishButton" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197">⚡ Quero meus +20.000 prompts por R$ 22,30 →</a>
+      <div class="security-row">
+        <span>🛡️ Pagamento 100% seguro</span>
+        <span>⚡ Acesso em menos de 1 minuto</span>
+        <span>↻ Garantia de 7 dias</span>
+      </div>
+
+      <div class="warning-box">
+        <p>⚠️ Essa oferta é exclusiva para quem completou o quiz. Ao sair dessa página ela <strong class="accent">some.</strong></p>
+      </div>
+
+      <div class="faq">
+        <h3>Dúvidas frequentes</h3>
+        <details>
+          <summary>Preciso saber usar IA pra isso funcionar?</summary>
+          <p>Não. Os prompts já vêm prontos para copiar, colar e adaptar com poucos detalhes da sua influencer.</p>
+        </details>
+        <details>
+          <summary>Funciona pra qualquer nicho?</summary>
+          <p>Sim. Você pode adaptar para moda, beleza, fitness, produtos físicos, perfis temáticos e conteúdo para marcas.</p>
+        </details>
+        <details>
+          <summary>Como vou receber os prompts?</summary>
+          <p>O acesso é liberado imediatamente após a compra na página de obrigado ou no e-mail informado no checkout.</p>
+        </details>
+        <details>
+          <summary>E se eu não gostar?</summary>
+          <p>Você tem garantia de 7 dias. Se não fizer sentido para você, basta solicitar reembolso dentro do prazo.</p>
+        </details>
+      </div>
+
+      <a class="cta offer-cta" href="https://payfast.greenn.com.br/170966/offer/SJgyJE?utm_source=Teste_ModelHub&utm_medium=Teste_ModelHub&utm_campaign=Teste_ModelHub&utm_content=Teste_ModelHub&utm_term=Teste_ModelHub&ch_id=138197">⚡ Quero meus +20.000 prompts por R$ 22,30 →</a>
+      <div class="complete" id="completeMessage">Pronto. Seu interesse foi registrado e o próximo passo pode ser conectado ao checkout.</div>
+      <p class="footer-note">Tecnologia Influencer IA</p>
+    </section>
+  </main>
+
+  <script>
+    // Controle simples do funil: alterna telas, atualiza progresso e preserva as respostas do quiz.
+    const screens = Array.from(document.querySelectorAll(".screen"));
+    const progressBar = document.getElementById("progressBar");
+    const answers = [];
+    const customPlayers = Array.from(document.querySelectorAll("[data-player]"));
+    const typewriterTimers = new WeakMap();
+    let currentStep = 0;
+    let autoGenerateTimer;
+    let audioContext;
+
+    function playInteractionSound(type = "soft") {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+
+      audioContext = audioContext || new AudioContext();
+
+      const now = audioContext.currentTime;
+      const gain = audioContext.createGain();
+      const primary = audioContext.createOscillator();
+      const secondary = audioContext.createOscillator();
+      const baseFrequency = type === "success" ? 660 : 520;
+
+      primary.type = "sine";
+      secondary.type = "triangle";
+      primary.frequency.setValueAtTime(baseFrequency, now);
+      secondary.frequency.setValueAtTime(baseFrequency * 1.5, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.045, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+
+      primary.connect(gain);
+      secondary.connect(gain);
+      gain.connect(audioContext.destination);
+      primary.start(now);
+      secondary.start(now + 0.025);
+      primary.stop(now + 0.18);
+      secondary.stop(now + 0.18);
+    }
+
+    function formatTime(value) {
+      if (!Number.isFinite(value)) return "0:00";
+
+      const minutes = Math.floor(value / 60);
+      const seconds = Math.floor(value % 60);
+      return `${minutes}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function syncPlayer(player) {
+      const video = player.querySelector("video");
+      const progress = player.querySelector("[data-player-progress]");
+      const time = player.querySelector("[data-player-time]");
+      const mute = player.querySelector("[data-player-mute]");
+
+      player.classList.toggle("is-playing", !video.paused);
+      player.classList.toggle("is-paused", video.paused);
+      player.classList.toggle("has-sound", !video.muted && video.volume > 0);
+
+      if (progress && Number.isFinite(video.duration) && video.duration > 0) {
+        progress.value = String((video.currentTime / video.duration) * 100);
+      }
+
+      if (time) {
+        time.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      }
+
+      if (mute) {
+        mute.setAttribute("aria-label", video.muted ? "Ativar som" : "Desativar som");
+      }
+    }
+
+    function playVideo(video) {
+      video.muted = false;
+      video.volume = 1;
+      const result = video.play();
+      if (result && typeof result.catch === "function") {
+        result.catch(() => syncPlayer(video.closest("[data-player]")));
+      }
+    }
+
+    function playVideosForScreen(screen) {
+      customPlayers.forEach((player) => {
+        const video = player.querySelector("video");
+
+        if (screen.contains(player)) {
+          playVideo(video);
+        } else {
+          video.pause();
+        }
+
+        syncPlayer(player);
+      });
+    }
+
+    customPlayers.forEach((player) => {
+      const video = player.querySelector("video");
+      const hit = player.querySelector(".player-hit");
+      const play = player.querySelector("[data-player-play]");
+      const progress = player.querySelector("[data-player-progress]");
+      const mute = player.querySelector("[data-player-mute]");
+      const full = player.querySelector("[data-player-full]");
+      const togglePlay = () => {
+        if (video.paused) {
+          playVideo(video);
+        } else {
+          video.pause();
+        }
+      };
+
+      hit.addEventListener("click", togglePlay);
+      play.addEventListener("click", togglePlay);
+
+      progress.addEventListener("input", () => {
+        if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+        video.currentTime = (Number(progress.value) / 100) * video.duration;
+        syncPlayer(player);
+      });
+
+      mute.addEventListener("click", () => {
+        video.muted = !video.muted;
+        if (!video.muted) {
+          video.volume = 1;
+        }
+        syncPlayer(player);
+      });
+
+      full.addEventListener("click", () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else if (player.requestFullscreen) {
+          player.requestFullscreen();
+        }
+      });
+
+      video.addEventListener("play", () => syncPlayer(player));
+      video.addEventListener("pause", () => syncPlayer(player));
+      video.addEventListener("loadedmetadata", () => syncPlayer(player));
+      video.addEventListener("timeupdate", () => syncPlayer(player));
+      video.addEventListener("volumechange", () => syncPlayer(player));
+      syncPlayer(player);
+    });
+
+    function typePrompt(element) {
+      if (!element) return;
+
+      const text = element.dataset.typeText || "";
+      const previousTimer = typewriterTimers.get(element);
+
+      if (previousTimer) {
+        clearInterval(previousTimer);
+      }
+
+      element.textContent = "";
+
+      let index = 0;
+      const timer = setInterval(() => {
+        element.textContent = text.slice(0, index + 1);
+        index += 1;
+
+        if (index >= text.length) {
+          clearInterval(timer);
+          typewriterTimers.delete(element);
+        }
+      }, 38);
+
+      typewriterTimers.set(element, timer);
+    }
+
+    function autoGenerate(screen) {
+      clearTimeout(autoGenerateTimer);
+
+      const button = screen.querySelector(".generate-btn");
+      if (!button) return;
+
+      autoGenerateTimer = setTimeout(() => {
+        if (!button.classList.contains("is-loading")) {
+          button.click();
+        }
+      }, 900);
+    }
+
+    function showStep(index) {
+      currentStep = Math.min(index, screens.length - 1);
+
+      screens.forEach((screen, screenIndex) => {
+        screen.classList.toggle("is-active", screenIndex === currentStep);
+      });
+
+      const progress = ((currentStep + 1) / screens.length) * 100;
+      progressBar.style.width = `${progress}%`;
+      typePrompt(screens[currentStep].querySelector(".typing-prompt"));
+      autoGenerate(screens[currentStep]);
+      playVideosForScreen(screens[currentStep]);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    const portrait = document.querySelector(".portrait");
+    const portraitImages = portrait ? Array.from(portrait.querySelectorAll("img")) : [];
+    const portraitDots = Array.from(document.querySelectorAll(".slider-dots i"));
+    let portraitIndex = 0;
+
+    function showPortrait(index) {
+      if (!portraitImages.length) return;
+
+      portraitIndex = (index + portraitImages.length) % portraitImages.length;
+
+      portraitImages.forEach((image, imageIndex) => {
+        image.classList.toggle("is-active", imageIndex === portraitIndex);
+      });
+
+      portraitDots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === portraitIndex);
+      });
+    }
+
+    document.querySelectorAll(".portrait-nav").forEach((button) => {
+      button.addEventListener("click", () => {
+        const direction = button.classList.contains("next") ? 1 : -1;
+        playInteractionSound();
+        showPortrait(portraitIndex + direction);
+      });
+    });
+
+    document.querySelectorAll("[data-next]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (button.classList.contains("option")) {
+          answers.push(button.textContent.trim());
+        }
+
+        playInteractionSound(button.classList.contains("option") ? "success" : "soft");
+        showStep(currentStep + 1);
+      });
+    });
+
+    document.querySelectorAll(".generate-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (button.classList.contains("is-loading")) return;
+
+        playInteractionSound("success");
+        const readyText = button.dataset.readyText || button.textContent.trim() || "Gerar";
+        button.classList.add("is-loading");
+        button.disabled = true;
+        button.textContent = "Gerando...";
+
+        setTimeout(() => {
+          button.classList.remove("is-loading");
+          button.disabled = false;
+          button.textContent = readyText;
+        }, 1800);
+      });
+    });
+
+    document.querySelectorAll(".offer-cta").forEach((button) => {
+      button.addEventListener("click", () => {
+        playInteractionSound("success");
+        const message = document.getElementById("completeMessage");
+        message.classList.add("is-visible");
+        console.info("Respostas do quiz:", answers);
+      });
+    });
+
+    let offerSeconds = 14 * 60 + 25;
+    const timerMinutes = document.getElementById("timerMinutes");
+    const timerSeconds = document.getElementById("timerSeconds");
+
+    setInterval(() => {
+      offerSeconds = Math.max(0, offerSeconds - 1);
+      const minutes = Math.floor(offerSeconds / 60);
+      const seconds = offerSeconds % 60;
+
+      timerMinutes.textContent = String(minutes).padStart(2, "0");
+      timerSeconds.textContent = String(seconds).padStart(2, "0");
+    }, 1000);
+
+    let urgencySeconds = 23 * 3600 + 39 * 60 + 36;
+    const urgencyEl = document.getElementById("urgencyCountdown");
+
+    setInterval(() => {
+      urgencySeconds = Math.max(0, urgencySeconds - 1);
+      const h = Math.floor(urgencySeconds / 3600);
+      const m = Math.floor((urgencySeconds % 3600) / 60);
+      const s = urgencySeconds % 60;
+      if (urgencyEl) {
+        urgencyEl.textContent = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
+
+
