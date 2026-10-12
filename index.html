@@ -1153,11 +1153,12 @@
     .price {
       margin: 6px 0 6px;
       color: var(--pink);
-      font-size: clamp(54px, 16vw, 76px);
+      font-size: clamp(48px, 14vw, 76px);
       font-weight: 900;
-      line-height: 0.95;
+      line-height: 1;
       text-align: center;
       text-shadow: 0 0 28px rgba(255, 45, 137, 0.38);
+      white-space: nowrap;
     }
 
     .timer {
@@ -2599,7 +2600,7 @@
 
       const mainPriceDisplay = document.getElementById("mainPriceDisplay");
       if (mainPriceDisplay) {
-        mainPriceDisplay.innerHTML = `<strike style="font-size:0.55em; color:#8d80a2; text-decoration:line-through; margin-right:8px;">R$ 63,70</strike> R$ 22,30`;
+        mainPriceDisplay.innerHTML = "R$&nbsp;22,30";
       }
 
       const oldPriceDisplay = document.getElementById("oldPriceDisplay");
